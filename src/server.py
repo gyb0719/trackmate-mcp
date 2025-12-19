@@ -141,13 +141,13 @@ def main():
     """Run the MCP server."""
     import os
 
-    # Use SSE transport for web deployment, stdio for local
+    # Use streamable-http transport for web deployment, stdio for local
     transport = os.environ.get("MCP_TRANSPORT", "stdio")
 
-    if transport == "sse":
+    if transport in ["sse", "streamable-http", "http"]:
         host = os.environ.get("HOST", "0.0.0.0")
         port = int(os.environ.get("PORT", 8000))
-        mcp.run(transport="sse", host=host, port=port)
+        mcp.run(transport="streamable-http", host=host, port=port)
     else:
         mcp.run()
 
