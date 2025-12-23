@@ -122,6 +122,8 @@ class SweetTrackerClient:
 
         if self.mock_mode:
             print("[TrackMate] Mock mode enabled (no API key). Using simulated data.")
+        else:
+            print(f"[TrackMate] API mode enabled. Key length: {len(self.api_key)}")
 
     async def get_company_list(self) -> list[dict]:
         """Get list of supported carriers."""
@@ -278,6 +280,8 @@ class SweetTrackerClient:
         """
         from src.services.carrier_info import detect_carrier_from_tracking
 
+        print(f"[TrackMate] track_auto_detect called: {tracking_number}")
+
         # Return mock data if mock mode enabled
         if self.mock_mode:
             detected_code = detect_carrier_from_tracking(tracking_number)
@@ -285,6 +289,8 @@ class SweetTrackerClient:
 
         # Try auto-detection first
         detected_code = detect_carrier_from_tracking(tracking_number)
+        print(f"[TrackMate] detected_code: {detected_code}")
+
         if detected_code:
             result = await self.track(tracking_number, detected_code)
             if result.success:
@@ -295,7 +301,9 @@ class SweetTrackerClient:
         for code in major_carriers:
             if code == detected_code:
                 continue  # Already tried
+            print(f"[TrackMate] trying carrier: {code}")
             result = await self.track(tracking_number, code)
+            print(f"[TrackMate] carrier {code} result: success={result.success}, error={result.error_message}")
             if result.success:
                 return result
 
