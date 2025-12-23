@@ -1,7 +1,7 @@
 [project]
-name = "trackmate-mcp"
+name = "택배비서"
 version = "0.1.0"
-description = "Smart delivery tracking assistant MCP - AI-powered package tracking with status translation and problem diagnosis"
+description = "택배 추적부터 문제 해결까지, AI가 알아서 챙겨주는 스마트 배송 비서"
 requires-python = ">=3.11"
 dependencies = [
     "mcp[cli]>=1.2.0",

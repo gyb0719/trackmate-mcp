@@ -121,7 +121,7 @@ class SweetTrackerClient:
         self.mock_mode = MOCK_ENABLED
 
         if self.mock_mode:
-            print("[TrackMate] Mock mode enabled (no API key). Using simulated data.")
+            print("[택배비서] Mock mode enabled (no API key). Using simulated data.")
 
     async def get_company_list(self) -> list[dict]:
         """Get list of supported carriers."""

@@ -10,7 +10,7 @@ from src.tools.inquiry import draft_inquiry
 
 # Create MCP server
 mcp = FastMCP(
-    name="TrackMate",
+    name="택배비서",
     instructions="택배 추적부터 문제 해결까지, AI가 알아서 챙겨주는 스마트 배송 비서. "
                  "배송 상태를 일상 언어로 번역하고, 문제 발생 시 해결책을 제안합니다."
 )
