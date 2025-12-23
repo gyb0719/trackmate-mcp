@@ -144,27 +144,24 @@ def detect_carrier_from_tracking(tracking_number: str) -> str | None:
     """
     Attempt to detect carrier from tracking number pattern.
     Returns Sweet Tracker carrier code or None.
+
+    Note: Pattern matching is not 100% reliable.
+    When detection fails, track_auto_detect will try multiple carriers.
     """
-    # CJ대한통운: starts with 6, 12-13 digits
+    # CJ대한통운: starts with 6, 12-13 digits (most reliable)
     if tracking_number.startswith("6") and len(tracking_number) in [12, 13]:
         return "04"
 
-    # 롯데택배: various patterns
-    if len(tracking_number) == 12 and tracking_number.isdigit():
-        if tracking_number.startswith("2") or tracking_number.startswith("4"):
-            return "08"
-
-    # 한진택배: 12 digits starting with 5 or 4
-    if len(tracking_number) == 12 and tracking_number.startswith(("5", "4")):
-        return "05"
-
-    # 우체국: 13 digits
+    # 우체국: 13 digits (reliable)
     if len(tracking_number) == 13 and tracking_number.isdigit():
         return "01"
 
-    # 로젠택배: 11 digits
+    # 로젠택배: 11 digits (reliable)
     if len(tracking_number) == 11 and tracking_number.isdigit():
         return "06"
+
+    # 12자리 숫자는 여러 택배사가 사용하므로 auto-detect에 맡김
+    # (CJ대한통운, 한진택배, 롯데택배 등이 모두 12자리 사용)
 
     return None
 
