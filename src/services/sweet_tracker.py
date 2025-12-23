@@ -197,9 +197,9 @@ class SweetTrackerClient:
                 for detail in tracking_details:
                     events.append(TrackingEvent(
                         time=detail.get("timeString", ""),
-                        status=detail.get("level", ""),
+                        status=detail.get("kind", ""),
                         location=detail.get("where", ""),
-                        detail=detail.get("kind", None)
+                        detail=detail.get("remark")
                     ))
 
                 # Determine current status
